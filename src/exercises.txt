@@ -1,0 +1,122 @@
+// materials
+// https://github.com/jeremybytes/go-for-csharp-dev
+
+// https://medium.com/swlh/return-early-pattern-3d18a41bba8
+// https://medium.com/@leodahal4/handle-errors-in-go-like-a-pro-5f2ab97c660b
+// https://medium.com/sellerapp/golang-project-structuring-ben-johnson-way-2a11035f94bc
+
+// https://www.youtube.com/watch?v=MDy7JQN5MN4
+// https://www.youtube.com/watch?v=3WsEDZRif6U
+// https://www.youtube.com/watch?v=PyDMqgOkiR8
+
+//======================================================================
+
+//for assert in ut you can use "github.com/stretchr/testify/assert"
+
+//======================================================================
+// 1
+// write function to sum n integers,
+// call should look like this:
+// v := sum(1,2,3)
+// v = sum(4,5,6,7,8,9,0)
+// function should also consume slice of int, how to do it?
+// hint: variadic function
+
+//======================================================================
+// 2
+// write function which append slice of ints with given value if current length is Odd
+//
+// func ExtendSliceIfSumEven(s []int, valToAppend int)
+// does it work?
+// are there an extra condition that slice should fulfill
+// how the function signature should change
+
+//======================================================================
+// 3 Structs, interfaces, sorting,
+// For given struct
+// type Dog struct {
+//  	Name string
+//	    Age  uint32
+// }
+// create a slice with 3 elements of Dog struct and write function
+// func MakeBirthday(dogs []Dog)
+// which iterate over collection and increment by 1 age of each dog + ut
+//
+// write function to sort (wrap around sort.Slice) array of structs by dog name (case-insensitive)
+// signature
+// func SortDogByName(dogs []Dog)
+//
+// what if you sort slice of pointer to structs, is there any syntax difference
+// func SortDogPtrByName(dogs []*Dog)
+//
+// write benchmark tests to compare SortDogByName(dogs []Dog) and SortDogPtrByName(dogs []*Dog)
+// you can write own function to generate long slice of data
+// see: https://www.practical-go-lessons.com/chap-34-benchmarks
+//
+// implement sort interface for []Dog structure to sort by age + write ut
+// you can define new type for that
+// type Dogs []Dog
+// see: https://medium.com/@kdnotes/sort-sort-interface-in-golang-1d263d96956d
+
+// ======================================================================
+// 4 Anagram
+// write function to check if two strings are anagrams https://en.wikipedia.org/wiki/Anagram
+// use map
+// func AreAnagram(a, b string) bool
+
+
+//======================================================================
+// 5
+// Write function IsPalindrome(s string) bool which checks if given string is palindrome
+// https://en.wikipedia.org/wiki/Palindrome
+// should work with "źaź" "ąćą"
+//func IsPalindrome(s string) bool
+
+//======================================================================
+// 6
+// start 10 goroutines from loop
+// each goroutine should print id which should be set as iteration counter
+// at this point you can use sleep as sync mechanism to wait for all goroutines
+// no ut required
+
+//======================================================================
+// 7
+// use wait group to wait for goroutines from ex 6
+
+//======================================================================
+// 8
+// Modify function MakeBirthday function from tutorial 3 to make operation on slice parallel
+
+//======================================================================
+// 9
+// create int channel
+// start one goroutine as producer, should push from 1 to 10 via channel
+// start 15 goroutines as consumers. Consumers should read from channel as long as data are available.
+// "Main" function should wait till all goroutines end.
+// How to signal via channel that there will be no more data?
+//
+// following test should  finish without panic.
+// func TestProducerConsumer(t *testing.T) {
+//  	ProducerConsumer() //"main" function
+// }
+
+//======================================================================
+// 10 Pipeline - very technical!
+// for advance swordsman only: https://www.youtube.com/watch?v=rUczpTPATyU
+//
+// goroutine 1 (NumberProducer) ----
+//                                   \
+//                                    ---- goroutine 3 (Merge) read and push via chan interface ----> read from chan interface "last goroutine"
+//                                   /
+// goroutine 2 (TextProducer)-------
+//
+// channels should be passed to goroutines with proper read write permission
+// select should be used in goroutine 3 (can it be done without select? if yes how)
+// goroutine 3 should handle situation when one channel is closed while other still working
+// handle channels nice, all goroutine should gracefully end when no data available
+// last goroutine can be used as test which drain all data from chan interface cast it and then check if receive all data
+//
+// signatures
+// func NumberProducer(pipe <<int channel with write only restriction>>, dataToProduce []int)
+// func TextProducer(pipe << string channel with write only restriction>>, dataToProduce []string)
+// func Merge(textPipe TYPE_FROM_ABOVE, numberPipe TYPE_FROM_ABOVE) <<interface channel with read only restriction>>
