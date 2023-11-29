@@ -40,6 +40,7 @@ func (s Solution8) Solve() {
 	fmt.Println("Dogs after birthday: ", dogs)
 }
 
+// no need for ptr to []Dog array
 func birthdayWorker(dogsSlice *[]Dog, index int) {
 	timeOffsetMin := 200
 	timeOffsetMax := 5000

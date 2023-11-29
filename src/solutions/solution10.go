@@ -60,6 +60,7 @@ func NumberProducer(pipe chan<- int, dataToProduce []int) {
 		pipe <- data
 	}
 
+	//defer
 	close(pipe)
 }
 
@@ -68,12 +69,15 @@ func TextProducer(pipe chan<- string, dataToProduce []string) {
 		pipe <- data
 	}
 
+	//defer
 	close(pipe)
 }
 
 func Merge(textPipe <-chan string, numberPipe <-chan int) <-chan interface{} {
 	out := make(chan interface{})
 
+	// move to goroutine
+	// use nil channels and handle it properly
 	select {
 	case number := <-numberPipe:
 		out <- number

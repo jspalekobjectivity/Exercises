@@ -5,6 +5,7 @@ import "fmt"
 type Solution4 struct {
 }
 
+//should be test
 func (s Solution4) Solve() {
 	fmt.Println("\n===== Solution 4 =====")
 
@@ -34,6 +35,7 @@ func AreAnagram(source, target string) bool {
 		targetMap[letter]++
 	}
 
+	// see maps package to compere maps
 	for letter, sourceCount := range sourceMap {
 		if targetCount, ok := targetMap[letter]; !ok || sourceCount != targetCount {
 			return false

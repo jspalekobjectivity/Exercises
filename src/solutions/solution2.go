@@ -30,6 +30,7 @@ func (s Solution2) Solve() {
 }
 
 func appendSlice(slice *[]int, value int) error {
+	// in general nil checks in golang apply mostly to errors
 	if *slice == nil {
 		return errors.New("invalid slice pointer")
 	}

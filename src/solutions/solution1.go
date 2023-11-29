@@ -2,9 +2,12 @@ package solutions
 
 import "fmt"
 
+//no need to create empty struct
 type Solution1 struct {
 }
 
+// could be just a function
+// should be test
 func (s Solution1) Solve() {
 	fmt.Println("===== Solution 1 =====")
 

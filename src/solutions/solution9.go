@@ -33,9 +33,13 @@ func Producer(channel chan<- int) {
 	for i := 1; i < 11; i++ {
 		channel <- i
 	}
+
+	//should be in defer
 	close(channel)
 }
 
+// consumer should read from channel in loop
+// key part of exercise was how to stop reading from channel in loop after channel is closed
 func Consumer(channel <-chan int) {
 	number := <-channel
 	fmt.Println("Consumed number: ", number)

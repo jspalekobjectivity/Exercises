@@ -28,6 +28,8 @@ func IsPalindrome(s string) bool {
 }
 
 func reverseString(s string) string {
+	// try this runes := []rune(s)
+	// now you have slice of runs to play with
 	size := len(s)
 	reversedStringBuffer := make([]byte, size)
 
